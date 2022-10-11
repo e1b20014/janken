@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head> <!--ファイルの情報宣言,画面には見えない-->
   <meta charset="utf-8">
   <title>janken</title>
 </head>
-<body>
-  <h1>Janken Game!</h1>
-    <div>
+<body> <!--画面に表示される-->
+    <div> <!--グループ化できるタグ-->
+        <h1>Janken Game </h1>
         <!--thymeleafを利用してjavaから値を受けるとき，ModelMapの変数名を指定のとおりに囲むと良い-->
         <!--Pathパラメータ-->
-        <p>Hi! [[${username}]]</p> <!--JankenControllerに書かれているusernameを表示している-->
+        <p>[[${username}]]</p> <!--JankenControllerに書かれているusernameを表示している-->
+
+        <a href="/Janken?param1=グー">グー</a>
+        <a href="/Janken?param1=パー">パー</a>
+        <a href="/Janken?param1=チョキ">チョキ</a>
     </div>
+
+  <div>
+    <p>[[${parameter}]]</p>
+    <p>[[${cpu}]]</p>
+    <p>[[${compare}]]</p>
+  </div>
 </body>
 
 </html>
