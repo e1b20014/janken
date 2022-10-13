@@ -1,3 +1,4 @@
+package oit.is.z0026.kaizi.janken.model;
 /*package oit.is.z0026.kaizi.janken.mode;
 
 import org.springframework.stereotype.Controller;
