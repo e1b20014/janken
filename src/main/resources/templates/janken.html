@@ -6,22 +6,29 @@
   <title>janken</title>
 </head>
 <body> <!--画面に表示される-->
-    <div> <!--グループ化できるタグ-->
-        <h1>Janken Game </h1>
-        <!--thymeleafを利用してjavaから値を受けるとき，ModelMapの変数名を指定のとおりに囲むと良い-->
-        <!--Pathパラメータ-->
-        <p>[[${username}]]</p> <!--JankenControllerに書かれているusernameを表示している-->
+  <div><a href="/logout">ログアウト</a></div>
 
-        <a href="/Janken?param1=グー">グー</a>
-        <a href="/Janken?param1=パー">パー</a>
-        <a href="/Janken?param1=チョキ">チョキ</a>
-    </div>
+  <div> <!--グループ化できるタグ-->
+      <h1>Janken Game! </h1>
+      <!--thymeleafを利用してjavaから値を受けるとき，ModelMapの変数名を指定のとおりに囲むと良い-->
+      <!--Pathパラメータ-->
+      <!--JankenControllerに書かれているusernameを表示している-->
+      <p>エントリー</p>
+      <ul th:if="${entry}">
+        <li th:each="username : ${entry.users}">[[${username}]]</li>
+      </ul>
+      <p>[[${username}]]</p>
 
-  <div>
-    <p>[[${parameter}]]</p>
-    <p>[[${cpu}]]</p>
-    <p>[[${compare}]]</p>
+      <a href="/JankenComp?param1=グー">グー</a>
+      <a href="/JankenComp?param1=パー">パー</a>
+      <a href="/JankenComp?param1=チョキ">チョキ</a>
   </div>
+
+<div th:if="${compare}"> <!--result部分に何も書かれていないときは何も出力されない-->
+  <p>[[${parameter}]]</p>
+  <p>[[${cpu}]]</p>
+  <p>[[${compare}]]</p>
+</div>
 </body>
 
 </html>
