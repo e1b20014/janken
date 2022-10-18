@@ -27,7 +27,7 @@ public class JankenAuthConfiguration {
     // UserBuilder usersにユーザ名，パスワード，ロールを指定してbuildする
     // このときパスワードはBCryptでハッシュ化されている．
     // ハッシュ化されたパスワードを得るには，この授業のbashターミナルで下記のように末尾にユーザ名とパスワードを指定すると良い(要VPN)
-    // $ sshrun htpasswd -nbBC 10 user1 p@ss
+    // $ sshrun htpasswd -nbBC 10 user1 isdev
     UserDetails user1 = users
         .username("user1")
         .password("$2y$10$vDlByoqwpSXr8ZjBdvrZpuviHI0t5EGd2E48cmo3MLDHWmGVSdxty")
@@ -38,8 +38,13 @@ public class JankenAuthConfiguration {
         .password("$2y$10$J/VSUq/LukU18oTnEXu5GOXpcSSqfWiWYlUOnLmBmdtrR21pkRX6W")
         .roles("USER")
         .build();
+    UserDetails user3 = users
+        .username("ほんだ")
+        .password("$2y$10$KV6mcfZlXFIuWrWZnaR74.M2gOqULoqldsLP/18oTPTJvuF1aOXeu")
+        .roles("USER")
+        .build();
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
-    return new InMemoryUserDetailsManager(user1, user2);
+    return new InMemoryUserDetailsManager(user1, user2, user3);
   }
 
   /**

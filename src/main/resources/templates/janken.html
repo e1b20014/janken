@@ -10,6 +10,7 @@
 
   <div> <!--グループ化できるタグ-->
       <h1>Janken Game! </h1>
+      <p>[[${username}]]</p>
       <!--thymeleafを利用してjavaから値を受けるとき，ModelMapの変数名を指定のとおりに囲むと良い-->
       <!--Pathパラメータ-->
       <!--JankenControllerに書かれているusernameを表示している-->
@@ -17,7 +18,7 @@
       <ul th:if="${entry}">
         <li th:each="username : ${entry.users}">[[${username}]]</li>
       </ul>
-      <p>[[${username}]]</p>
+      
 
       <a href="/JankenComp?param1=グー">グー</a>
       <a href="/JankenComp?param1=パー">パー</a>
