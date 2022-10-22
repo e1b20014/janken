@@ -16,14 +16,11 @@
       <!--JankenControllerに書かれているusernameを表示している-->
       <p>エントリー</p>
       <ul th:if="${users}"> <!--Usersが返されているかどうか確認-->
-        <li th:each="user : ${users}">[[${user.name}]]</li> <!--拡張for文のみたいなやり方Usersの配列をuserに格納し、欲しいnameを後に書いている-->
+        <li th:each="user : ${users}"><a th:href="@{/match(id=${user.id})}"> [[${user.name}]]</a></li>
+        <!--/*<li th:each="user : ${users}">[[${user.name}]]</li> 拡張for文のみたいなやり方Usersの配列をuserに格納し、欲しいnameを後に書いている*/-->
       </ul>
       <p>試合結果</p>
       <div><p th:each="match : ${matches}">ID = [[${match.id}]] user1 = [[${match.user1}]] user2 = [[${match.user2}]] user1Hand = [[${match.user1Hand}]] user2Hand = [[${match.user2Hand}]]</p></div>
-
-      <a href="/JankenComp?param1=グー">グー</a>
-      <a href="/JankenComp?param1=パー">パー</a>
-      <a href="/JankenComp?param1=チョキ">チョキ</a>
   </div>
 
 <div th:if="${compare}"> <!--result部分に何も書かれていないときは何も出力されない-->

@@ -10,9 +10,9 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserMapper {
 
-  /*@Select("SELECT id,userName,chamberName from chamber where id = #{id}")
+  @Select("SELECT id,name from users where id = #{id}")
   User selectById(int id);
-
+/* 
   @Insert("INSERT INTO chamber (userName,chamberName) VALUES (#{userName},#{chamberName});")
   @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
   void insertChamber(User chamber);

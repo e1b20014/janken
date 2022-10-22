@@ -61,8 +61,8 @@ public class JankenController {
       return "janken.html";
     }
 
-    @GetMapping("/JankenComp")
-    public String param(@RequestParam String param1, ModelMap model) {
+    /*@GetMapping("/JankenComp")
+    public String param(Principal prin, @RequestParam String param1, ModelMap model) {
       model.addAttribute("parameter","自分の手 "+param1); //paramがもってきた変数
       model.addAttribute("cpu","相手の手 グー");
       String gu = "グー";
@@ -79,5 +79,29 @@ public class JankenController {
         model.addAttribute("compare","結果 "+lose);
       }
       return "janken.html";
+    }*/
+
+    @GetMapping("/match")
+    public String param(Principal prin,@RequestParam int id, ModelMap model) {
+      String loginUser = prin.getName();
+      model.addAttribute("username", loginUser);
+      User user = userMapper.selectById(id);
+      model.addAttribute("enemy", user);
+     /*  model.addAttribute("parameter","自分の手 "+param1); //paramがもってきた変数
+      model.addAttribute("cpu","相手の手 グー");
+      String gu = "グー";
+      String win = "勝ちです";
+      String lose = "負けです";
+      String draw = "あいこです";
+      String pa = "パー";
+      String tyo = "チョキ";
+      if(param1.equals(gu)){
+        model.addAttribute("compare","結果 "+draw);
+      }else if(param1.equals(pa)){
+        model.addAttribute("compare","結果 "+win);
+      }else if(param1.equals(tyo)){
+        model.addAttribute("compare","結果 "+lose);
+      }*/
+      return "match.html";
     }
 }
