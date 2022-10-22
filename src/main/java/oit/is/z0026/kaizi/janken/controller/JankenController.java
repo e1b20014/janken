@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 //import oit.is.z0026.kaizi.janken.model.Entry;
 import oit.is.z0026.kaizi.janken.model.User;
 import oit.is.z0026.kaizi.janken.model.UserMapper;
+import oit.is.z0026.kaizi.janken.model.Match;
+import oit.is.z0026.kaizi.janken.model.MatchMapper;
 
 @Controller
 public class JankenController {
@@ -23,6 +25,9 @@ public class JankenController {
 */
   @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  MatchMapper matchMapper;
 
     @GetMapping("/JankenController")
     public String jankenController() {
@@ -45,6 +50,8 @@ public class JankenController {
       model.addAttribute("username", "Hi! "+loginUser);
       ArrayList<User> users = userMapper.selectAllUser();
       model.addAttribute("users", users);
+      ArrayList<Match> matches = matchMapper.selectAllMatch();
+      model.addAttribute("matches", matches);
       return "janken.html";
     }
 
