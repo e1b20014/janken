@@ -12,16 +12,19 @@
       <h1>Match! </h1>
       <p>[[${username}]] VS [[${enemy.name}]]</p>
 
-      <a href="/JankenComp?param1=グー">グー</a>
-      <a href="/JankenComp?param1=パー">パー</a>
-      <a href="/JankenComp?param1=チョキ">チョキ</a>
+      <a th:href="@{/fight(id=${enemy.id},param1=グー)}">グー</a>
+      <a th:href="@{/fight(id=${enemy.id},param1=パー)}">パー</a>
+      <a th:href="@{/fight(id=${enemy.id},param1=チョキ)}">チョキ</a>
   </div>
 
 <div th:if="${compare}"> <!--result部分に何も書かれていないときは何も出力されない-->
   <p>[[${parameter}]]</p>
   <p>[[${cpu}]]</p>
   <p>[[${compare}]]</p>
+
+  <a href="/janken">もどる</a>
 </div>
+
 </body>
 
 </html>

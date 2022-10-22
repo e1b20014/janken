@@ -10,13 +10,10 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface MatchMapper {
 
-  /*@Select("SELECT id,userName,chamberName from chamber where id = #{id}")
-  User selectById(int id);
-
-  @Insert("INSERT INTO chamber (userName,chamberName) VALUES (#{userName},#{chamberName});")
+  @Insert("INSERT INTO matches (user1,user2,user1Hand,user2Hand) VALUES (#{user1},#{user2},#{user1Hand},#{user2Hand})")
   @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
-  void insertChamber(User chamber);
- */
+  void insertMatch(Match match);
+
   @Select("SELECT * from matches")  //where name = #{username} usernameに入っている変数が調べることができる
   ArrayList<Match> selectAllMatch();
 
