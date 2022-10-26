@@ -17,4 +17,7 @@ public interface MatchMapper {
   @Select("SELECT * from matches")  //where name = #{username} usernameに入っている変数が調べることができる
   ArrayList<Match> selectAllMatch();
 
+  @Select("SELECT * from matchinfo")  //where name = #{username} usernameに入っている変数が調べることができる
+  ArrayList<Match> selectAllMatchInfo();
+
 }
