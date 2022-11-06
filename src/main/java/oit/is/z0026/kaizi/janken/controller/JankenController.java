@@ -1,5 +1,6 @@
 package oit.is.z0026.kaizi.janken.controller;
 
+import java.lang.ProcessHandle.Info;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -16,7 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 import oit.is.z0026.kaizi.janken.model.User;
 import oit.is.z0026.kaizi.janken.model.UserMapper;
 import oit.is.z0026.kaizi.janken.model.Match;
+import oit.is.z0026.kaizi.janken.model.MatchInfo;
 import oit.is.z0026.kaizi.janken.model.MatchMapper;
+import oit.is.z0026.kaizi.janken.model.MatchInfoMapper;
+
+
 
 @Controller
 public class JankenController {
@@ -28,6 +33,13 @@ public class JankenController {
 
   @Autowired
   MatchMapper matchMapper;
+
+  //@Autowired
+  //MatchInfoMapper matchinfoMapper;
+
+  @Autowired
+  MatchInfoMapper info;
+
 
     @GetMapping("/JankenController")
     public String jankenController() {
@@ -52,6 +64,8 @@ public class JankenController {
       model.addAttribute("users", users);
       ArrayList<Match> matches = matchMapper.selectAllMatch();
       model.addAttribute("matches", matches);
+      ArrayList<MatchInfo> matchinfo = info.selectMatchInfoByTrue();
+      model.addAttribute("matchinfo", matchinfo);
       return "janken.html";
     }
 
@@ -105,7 +119,7 @@ public class JankenController {
       return "match.html";
     }
 
-    @GetMapping("/fight")
+    /*@GetMapping("/fight")
     public String fight(Principal prin,@RequestParam int id,@RequestParam String param1,ModelMap model){
       model.addAttribute("parameter","自分の手 "+param1); //paramがもってきた変数
       model.addAttribute("cpu","相手の手 グー");
@@ -134,6 +148,38 @@ public class JankenController {
       match.setUser2Hand(gu);
       matchMapper.insertMatch(match);
       return "match.html";
+    }*/
+
+    @GetMapping("/fight")
+    public String fight(Principal prin,@RequestParam int id,@RequestParam String param1,ModelMap model){
+      String loginUser = prin.getName();
+      MatchInfo matchinfo = new MatchInfo();
+      User user = userMapper.selectByName(loginUser);
+      //ArrayList<MatchInfo> matchInfos = info.selectMatchInfoByTrueComp(user.getId(),id);
+      //if(matchInfos.size() == 0){
+        //info.insertMatchInfo(user.getId(),id,hand,true);
+      //}else if(matchInfos.size() == 1){
+        //MatchInfo matchInfo = matchInfos.get(0);
+        matchinfo.setUser1(user.getId());
+        matchinfo.setUser2(id);
+        matchinfo.setUser1Hand(param1);
+        matchinfo.setIsActive(true);
+        info.insertMatchInfo(matchinfo);
+        String gu = "グー";
+        String win = "勝ちです";
+        String lose = "負けです";
+        String draw = "あいこです";
+        String pa = "パー";
+        String tyo = "チョキ";
+        if(param1.equals(gu)){
+          model.addAttribute("compare","結果 "+draw);
+        }else if(param1.equals(pa)){
+          model.addAttribute("compare","結果 "+win);
+        }else if(param1.equals(tyo)){
+          model.addAttribute("compare","結果 "+lose);
+        }
+      //}
+      return "wait.html";
     }
 
 }
