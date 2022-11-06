@@ -64,7 +64,7 @@ public class JankenController {
       model.addAttribute("users", users);
       ArrayList<Match> matches = matchMapper.selectAllMatch();
       model.addAttribute("matches", matches);
-      ArrayList<MatchInfo> matchinfo = info.selectAllMatchInfo();
+      ArrayList<MatchInfo> matchinfo = info.selectMatchInfoByTrue();
       model.addAttribute("matchinfo", matchinfo);
       return "janken.html";
     }
@@ -165,7 +165,7 @@ public class JankenController {
         matchinfo.setUser1Hand(param1);
         matchinfo.setIsActive(true);
         info.insertMatchInfo(matchinfo);
-/*         String gu = "グー";
+        String gu = "グー";
         String win = "勝ちです";
         String lose = "負けです";
         String draw = "あいこです";
@@ -178,7 +178,7 @@ public class JankenController {
         }else if(param1.equals(tyo)){
           model.addAttribute("compare","結果 "+lose);
         }
- */      //}
+      //}
       return "wait.html";
     }
 
