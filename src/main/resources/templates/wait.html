@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head> <!--ファイルの情報宣言,画面には見えない-->
+  <meta charset="utf-8">
+  <title>janken</title>
+</head>
+<body> <!--画面に表示される-->
+
+  <div> <!--グループ化できるタグ-->
+      <h1>相手の手を待っています</h1>
+      Hi! <div sec:authentication="name"></div>
+  </div>
+
+  <div th:if="${matches}"> <!--result部分に何も書かれていないときは何も出力されない-->
+    <p>結果</p>
+    <div><p th:each="match : ${matches}"> Match id: [[${match.id}]] user1: [[${match.user1}]] user2: [[${match.user2}]] user1Hand: [[${match.user1Hand}]] user2Hand: [[${match.user2Hand}]]</p></div>
+    <a href="/janken">もどる</a>
+  </div>
+</body>
+
+</html>
